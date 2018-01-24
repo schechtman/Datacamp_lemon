@@ -5,14 +5,7 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 problem_title = 'Lemons Classification'
 _target_column_name = 'IsBadBuy'
-_ignore_column_names = ['PurchDate', 'VehicleAge',
-       'Make', 'Model', 'Trim', 'SubModel', 'WheelTypeID', 'WheelType', 'VehOdo', 
-       'TopThreeAmericanName', 'MMRAcquisitionAuctionAveragePrice',
-       'MMRAcquisitionAuctionCleanPrice', 'MMRAcquisitionRetailAveragePrice',
-       'MMRAcquisitonRetailCleanPrice', 'MMRCurrentAuctionAveragePrice',
-       'MMRCurrentAuctionCleanPrice', 'MMRCurrentRetailAveragePrice',
-       'MMRCurrentRetailCleanPrice', 'PRIMEUNIT', 'AUCGUART', 'BYRNO',
-       'VNZIP1', 'VNST', 'VehBCost', 'IsOnlineSale', 'WarrantyCost']
+_ignore_column_names = ["VehYear", "WheelTypeID", "AUCGUART", "PRIMEUNIT", "BYRNO", "VNST", "Unnamed: 0", "RefId"]
 _prediction_label_names = [0, 1]
 # A type (class) which will be used to create wrapper objects for y_pred
 Predictions = rw.prediction_types.make_multiclass(

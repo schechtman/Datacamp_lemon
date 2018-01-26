@@ -24,29 +24,45 @@ class FeatureExtractor():
         global column_dummies
         if y is not None:
             column_dummies = pd.concat(
-            [X_df.get(['RefId', 'VehYear', 'VehicleAge']),
+            [X_df.get(['MMRAcquisitionAuctionAveragePrice', 'MMRAcquisitionAuctionCleanPrice', 'MMRAcquisitionRetailAveragePrice', 'MMRAcquisitonRetailCleanPrice', 'MMRCurrentAuctionAveragePrice', 'MMRCurrentAuctionCleanPrice', 'MMRCurrentRetailAveragePrice', 'MMRCurrentRetailCleanPrice', 'PurchDate', 'WarrantyCost', 'RefId', 'VehYear', 'VehicleAge']),
              pd.get_dummies(X_df.Size, prefix = 'Size', drop_first=True),
              pd.get_dummies(X_df.Auction, prefix='Auction', drop_first=True),
              pd.get_dummies(X_df.Color, prefix='Color', drop_first=True),
              pd.get_dummies(X_df.Transmission, prefix='Transmission', drop_first=True),
              pd.get_dummies(
-                 X_df.Nationality, prefix='Nationality', drop_first=True)
+                 X_df.Nationality, prefix='Nationality', drop_first=True),
+             pd.get_dummies(X_df.Model, prefix='Model', drop_first=True),
+             pd.get_dummies(X_df.SubModel, prefix='SubModel', drop_first=True),
+             pd.get_dummies(X_df.Make, prefix="Make", drop_first=True),
+             pd.get_dummies(X_df.WheelType, prefix="WheelType", drop_first=True),
+             pd.get_dummies(X_df.TopThreeAmericanName, prefix="TopThreeAmericanName", drop_first=True),
+             pd.get_dummies(X_df.VNZIP1, prefix="VNZIP1", drop_first=True),
              ],
             axis=1).columns
         return self
 
     def transform(self, X_df):
-        X_df = X_df.fillna(-1)
+        X_df["MMRAcquisitionAuctionAveragePrice"].fillna(X_df["MMRAcquisitionAuctionAveragePrice"].median())
+        X_df["MMRAcquisitionAuctionCleanPrice"].fillna(X_df["MMRAcquisitionAuctionCleanPrice"].median())
+        X_df["MMRAcquisitionRetailAveragePrice"].fillna(X_df["MMRAcquisitionRetailAveragePrice"].median())
+        X_df["MMRAcquisitonRetailCleanPrice"].fillna(X_df["MMRAcquisitonRetailCleanPrice"].median())
+        X_df.fillna(-1)
         X_df_new = pd.concat(
-            [X_df.get(['RefId', 'VehYear', 'VehicleAge']),
+            [X_df.get(['MMRAcquisitionAuctionAveragePrice', 'MMRAcquisitionAuctionCleanPrice', 'MMRAcquisitionRetailAveragePrice', 'MMRAcquisitonRetailCleanPrice', 'MMRCurrentAuctionAveragePrice', 'MMRCurrentAuctionCleanPrice', 'MMRCurrentRetailAveragePrice', 'MMRCurrentRetailCleanPrice', 'PurchDate', 'WarrantyCost', 'RefId', 'VehYear', 'VehicleAge']),
              pd.get_dummies(X_df.Size, prefix = 'Size', drop_first=True),
              pd.get_dummies(X_df.Auction, prefix='Auction', drop_first=True),
              pd.get_dummies(X_df.Color, prefix='Color', drop_first=True),
              pd.get_dummies(X_df.Transmission, prefix='Transmission', drop_first=True),
              pd.get_dummies(
-                 X_df.Nationality, prefix='Nationality', drop_first=True)
+                 X_df.Nationality, prefix='Nationality', drop_first=True),
+             pd.get_dummies(X_df.Model, prefix='Model', drop_first=True),
+             pd.get_dummies(X_df.SubModel, prefix='SubModel', drop_first=True),
+             pd.get_dummies(X_df.Make, prefix="Make", drop_first=True),
+             pd.get_dummies(X_df.WheelType, prefix="WheelType", drop_first=True),
+             pd.get_dummies(X_df.TopThreeAmericanName, prefix="TopThreeAmericanName", drop_first=True),
+             pd.get_dummies(X_df.VNZIP1, prefix="VNZIP1", drop_first=True),
              ],
             axis=1)
         X_df_new = X_df_new.fillna(-1)
-        XX= fix_columns(X_df_new, column_dummies).as_matrix()
-        return XX
+        X_df_new = fix_columns(X_df_new, column_dummies).as_matrix()
+        return X_df_new

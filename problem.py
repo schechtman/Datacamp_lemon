@@ -1,3 +1,4 @@
+
 import os
 import pandas as pd
 import rampwf as rw
@@ -33,7 +34,7 @@ def _read_data(path, f_name):
 
 
 def get_train_data(path='.'):
-    f_name = 'train.csv'
+    f_name = 'train2.csv'
     return _read_data(path, f_name)
 
 

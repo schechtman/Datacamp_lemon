@@ -12,7 +12,7 @@ class Classifier(BaseEstimator):
         self.clf = make_pipeline_imb(
             Imputer(strategy='median'), 
             RandomOverSampler(), 
-            LogisticRegression(C=1e-3, penalty="l2"))
+            LogisticRegression(C=0.010826367338740546, penalty="l2"))
 
     def fit(self, X, y):
         self.clf.fit(X, y)

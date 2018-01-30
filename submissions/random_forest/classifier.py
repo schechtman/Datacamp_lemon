@@ -12,7 +12,7 @@ class Classifier(BaseEstimator):
         self.clf = make_pipeline_imb(
             Imputer(strategy='median'),
             RandomOverSampler(),
-            RandomForestClassifier(10, verbose=True, min_impurity_decrease=10e-5)
+            RandomForestClassifier(n_estimators=126, verbose=True, min_impurity_decrease=10e-5, criterion="entropy")
             )
 
     def fit(self, X, y):

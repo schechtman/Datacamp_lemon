@@ -34,7 +34,7 @@ def _read_data(path, f_name):
 
 
 def get_train_data(path='.'):
-    f_name = 'train2.csv'
+    f_name = 'train.csv'
     return _read_data(path, f_name)
 
 
